@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from pathlib import Path
 import re
 
-from tubeair.processor import process_plain_text, process_youtube_url
+from tubeair.processor import process_plain_text, process_youtube_capture
 from tubeair.transcript import TranscriptError
 from tubeair.youtube import YouTubeUrlError
 
@@ -30,7 +30,7 @@ class BotResult:
 
 def process_message(
     text: str,
-    out_dir: Path = Path("out/youtube"),
+    intake_dir: Path | None = None,
     text_out_dir: Path = Path("out/text"),
     language: str = "en",
     enrich: bool = True,
@@ -53,7 +53,7 @@ def process_message(
         return BotResult(ok=False, reply=HELP_MESSAGE)
 
     try:
-        result = process_youtube_url(url, out_dir=out_dir, language=language, enrich=enrich)
+        result = process_youtube_capture(url, intake_dir=intake_dir, language=language, enrich=enrich)
     except YouTubeUrlError as exc:
         return BotResult(ok=False, reply=f"I could not read that YouTube URL: {exc}")
     except TranscriptError as exc:

@@ -8,6 +8,7 @@ from pathlib import Path
 import sys
 
 from tubeair.bot import process_message
+from tubeair.intake import DEFAULT_INTAKE_ROOT
 
 
 TOKEN_ENV_VAR = "TELEGRAM_BOT_TOKEN"
@@ -19,10 +20,10 @@ def main(argv: list[str] | None = None) -> int:
         description="Run the TubeAIR Telegram bot.",
     )
     parser.add_argument(
-        "--out-dir",
-        default="out/youtube",
+        "--intake-dir",
+        default=DEFAULT_INTAKE_ROOT,
         type=Path,
-        help="Folder for generated Markdown files. Default: out/youtube",
+        help=f"Fusion247/MyPKA TubeAIR intake root. Default: {DEFAULT_INTAKE_ROOT}",
     )
     parser.add_argument(
         "--text-out-dir",
@@ -69,7 +70,7 @@ def main(argv: list[str] | None = None) -> int:
 
         result = process_message(
             update.message.text,
-            out_dir=args.out_dir,
+            intake_dir=args.intake_dir,
             text_out_dir=args.text_out_dir,
             language=args.language,
             enrich=not args.no_ai,
