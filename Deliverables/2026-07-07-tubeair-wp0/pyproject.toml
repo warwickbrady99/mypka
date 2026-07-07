@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tubeair"
+version = "0.1.0"
+description = "Save YouTube transcripts as timestamped Markdown files."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "python-telegram-bot>=21.0",
+  "youtube-transcript-api>=1.2.4",
+]
+
+[project.optional-dependencies]
+dev = [
+]
+
+[project.scripts]
+tubeair = "tubeair.cli:main"
+tubeair-telegram = "tubeair.telegram_bot:main"
