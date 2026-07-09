@@ -140,3 +140,12 @@ When the context changes significantly, start a new Codex chat and point it to t
 - Added beginner instructions, schema documentation, a JSON data file, a validator, and focused unit tests.
 - Updated `docs/exam-board-map.md` to reference the course-map MVP while preserving the warning that the student's personal Science route and tier are still unconfirmed.
 - Check run: bundled Python `-m unittest test_course_map.py` passed with 5 tests.
+
+## 2026-07-09 - TutAIR course-map quality pass
+
+- Reviewed the AQA GCSE Combined Science: Trilogy 8464 Biology Paper 1 / Cell biology MVP slice against the official AQA specification.
+- Improved all six existing learning objective statements so they align more closely with AQA sections 4.1.1.1, 4.1.1.2, 4.1.1.5, 4.1.2.2, and 4.1.2.3.
+- Added objective-level `source_trace` fields with source ID, section, page, PDF line reference, and trace status.
+- Added `quality-review.md` to document review results, assumptions, and known gaps. The slice remains partial by design and does not yet cover all of AQA 8464 section 4.1.
+- Updated schema docs and validation tests for traceable official-specification references.
+- Check run: course-map tests passed with 7 tests, `validate_course_map.py` passed, and the existing TutAIR intake/process/viewer tests passed with 16 tests.

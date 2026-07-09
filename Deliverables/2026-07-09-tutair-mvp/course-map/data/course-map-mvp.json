@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1.0",
+  "schema_version": "0.1.1",
   "map_id": "tutair-gcse-course-map-mvp",
   "status": "mvp",
   "last_updated": "2026-07-09",
@@ -58,24 +58,46 @@
                         {
                           "topic_id": "CELL-BIOLOGY",
                           "name": "Cell biology",
-                          "spec_reference": "Biology topic 1",
+                          "spec_reference": "AQA 8464 section 4.1",
+                          "coverage_status": "partial_mvp",
+                          "coverage_note": "This MVP intentionally maps a small, quality-reviewed subset of Cell biology. It does not yet cover every AQA 8464 section 4.1 learning point.",
+                          "known_gaps": [
+                            "4.1.1.3 Cell specialisation",
+                            "4.1.1.4 Cell differentiation",
+                            "4.1.3 Transport in cells"
+                          ],
                           "subtopics": [
                             {
                               "subtopic_id": "CELL-STRUCTURE",
                               "name": "Cell structure",
+                              "spec_reference": "AQA 8464 sections 4.1.1.1 and 4.1.1.2",
                               "learning_objectives": [
                                 {
                                   "objective_id": "LO-AQA-8464-BIO-B1-CELL-BIOLOGY-CELL-STRUCTURE-001",
-                                  "statement": "Identify the main structures in animal and plant cells and describe their functions.",
-                                  "source_ref": "AQA 8464 Biology topic 1: Cell biology",
-                                  "status": "derived_from_specification",
+                                  "statement": "Explain how the main sub-cellular structures in animal, plant, and bacterial cells are related to their functions.",
+                                  "source_ref": "AQA 8464 section 4.1.1.2 Animal and plant cells",
+                                  "source_trace": {
+                                    "source_id": "AQA-8464-SPEC",
+                                    "section": "4.1.1.2",
+                                    "page": 20,
+                                    "pdf_lines": "600-630",
+                                    "trace_status": "verified_against_official_specification"
+                                  },
+                                  "status": "verified_official_specification",
                                   "tier_scope": "shared"
                                 },
                                 {
                                   "objective_id": "LO-AQA-8464-BIO-B1-CELL-BIOLOGY-CELL-STRUCTURE-002",
-                                  "statement": "Compare eukaryotic and prokaryotic cells using their key structural differences.",
-                                  "source_ref": "AQA 8464 Biology topic 1: Cell biology",
-                                  "status": "derived_from_specification",
+                                  "statement": "Compare eukaryotic and prokaryotic cells using their key structural differences, including nucleus, DNA loop, plasmids, cell membrane, cytoplasm, and cell wall.",
+                                  "source_ref": "AQA 8464 section 4.1.1.1 Eukaryotes and prokaryotes",
+                                  "source_trace": {
+                                    "source_id": "AQA-8464-SPEC",
+                                    "section": "4.1.1.1",
+                                    "page": 20,
+                                    "pdf_lines": "580-596",
+                                    "trace_status": "verified_against_official_specification"
+                                  },
+                                  "status": "verified_official_specification",
                                   "tier_scope": "shared"
                                 }
                               ]
@@ -83,19 +105,34 @@
                             {
                               "subtopic_id": "MICROSCOPY",
                               "name": "Microscopy",
+                              "spec_reference": "AQA 8464 section 4.1.1.5 and required practical activity 1",
                               "learning_objectives": [
                                 {
                                   "objective_id": "LO-AQA-8464-BIO-B1-CELL-BIOLOGY-MICROSCOPY-001",
                                   "statement": "Use the relationship between magnification, image size, and real size in microscopy calculations.",
-                                  "source_ref": "AQA 8464 Biology topic 1: Cell biology",
-                                  "status": "derived_from_specification",
+                                  "source_ref": "AQA 8464 section 4.1.1.5 Microscopy",
+                                  "source_trace": {
+                                    "source_id": "AQA-8464-SPEC",
+                                    "section": "4.1.1.5",
+                                    "page": 22,
+                                    "pdf_lines": "674-683",
+                                    "trace_status": "verified_against_official_specification"
+                                  },
+                                  "status": "verified_official_specification",
                                   "tier_scope": "shared"
                                 },
                                 {
                                   "objective_id": "LO-AQA-8464-BIO-B1-CELL-BIOLOGY-MICROSCOPY-002",
-                                  "statement": "Describe how microscopy helps scientists observe cell structures that are too small to see with the naked eye.",
-                                  "source_ref": "AQA 8464 Biology topic 1: Cell biology",
-                                  "status": "derived_from_specification",
+                                  "statement": "Explain how developments in microscopy, including electron microscopy, increased understanding of sub-cellular structures.",
+                                  "source_ref": "AQA 8464 section 4.1.1.5 Microscopy",
+                                  "source_trace": {
+                                    "source_id": "AQA-8464-SPEC",
+                                    "section": "4.1.1.5",
+                                    "page": 22,
+                                    "pdf_lines": "661-670",
+                                    "trace_status": "verified_against_official_specification"
+                                  },
+                                  "status": "verified_official_specification",
                                   "tier_scope": "shared"
                                 }
                               ]
@@ -103,19 +140,34 @@
                             {
                               "subtopic_id": "CELL-DIVISION",
                               "name": "Cell division",
+                              "spec_reference": "AQA 8464 sections 4.1.2.1, 4.1.2.2, and 4.1.2.3",
                               "learning_objectives": [
                                 {
                                   "objective_id": "LO-AQA-8464-BIO-B1-CELL-BIOLOGY-CELL-DIVISION-001",
-                                  "statement": "Explain why cells divide by mitosis for growth and repair.",
-                                  "source_ref": "AQA 8464 Biology topic 1: Cell biology",
-                                  "status": "derived_from_specification",
+                                  "statement": "Describe the overall stages of the cell cycle, including mitosis, and explain why mitosis matters for growth and development.",
+                                  "source_ref": "AQA 8464 section 4.1.2.2 Mitosis and the cell cycle",
+                                  "source_trace": {
+                                    "source_id": "AQA-8464-SPEC",
+                                    "section": "4.1.2.2",
+                                    "page": 23,
+                                    "pdf_lines": "695-716",
+                                    "trace_status": "verified_against_official_specification"
+                                  },
+                                  "status": "verified_official_specification",
                                   "tier_scope": "shared"
                                 },
                                 {
                                   "objective_id": "LO-AQA-8464-BIO-B1-CELL-BIOLOGY-CELL-DIVISION-002",
-                                  "statement": "Describe the role of stem cells in producing specialised cells.",
-                                  "source_ref": "AQA 8464 Biology topic 1: Cell biology",
-                                  "status": "derived_from_specification",
+                                  "statement": "Describe the function of stem cells in embryos, adult animals, and plant meristems, including their potential uses and risks.",
+                                  "source_ref": "AQA 8464 section 4.1.2.3 Stem cells",
+                                  "source_trace": {
+                                    "source_id": "AQA-8464-SPEC",
+                                    "section": "4.1.2.3",
+                                    "page": 24,
+                                    "pdf_lines": "718-753",
+                                    "trace_status": "verified_against_official_specification"
+                                  },
+                                  "status": "verified_official_specification",
                                   "tier_scope": "shared"
                                 }
                               ]

@@ -74,12 +74,16 @@ Subject
 - `topic_id` - stable topic key.
 - `name` - topic name.
 - `spec_reference` - official topic reference where known.
+- `coverage_status` - `complete`, `partial_mvp`, or `needs_review`.
+- `coverage_note` - short explanation of the current coverage boundary.
+- `known_gaps` - list of official specification sections deliberately not mapped yet.
 - `subtopics` - list of sub-topics.
 
 ### Sub-topic
 
 - `subtopic_id` - stable sub-topic key.
 - `name` - sub-topic name.
+- `spec_reference` - official sub-topic reference where known.
 - `learning_objectives` - list of learning objectives.
 
 ### Learning Objective
@@ -87,7 +91,8 @@ Subject
 - `objective_id` - globally unique stable ID.
 - `statement` - what the student should know, understand, or be able to do.
 - `source_ref` - official specification reference where known.
-- `status` - `official_specification`, `derived_from_specification`, `needs_review`, or `retired`.
+- `source_trace` - machine-readable source pointer with `source_id`, `section`, `page`, optional `pdf_lines`, and `trace_status`.
+- `status` - `verified_official_specification`, `derived_from_specification`, `needs_review`, or `retired`.
 - `tier_scope` - `foundation`, `higher`, `shared`, or `needs_confirmation`.
 
 ## Stable ID Rule

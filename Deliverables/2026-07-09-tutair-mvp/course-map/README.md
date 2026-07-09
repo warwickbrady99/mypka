@@ -25,6 +25,7 @@ This is intentionally small. It proves the structure before TutAIR expands to mo
 
 - `course-map-schema.md` - explains the hierarchy, fields, and ID rules.
 - `beginner-instructions.md` - plain-English steps for editing and checking the course map.
+- `quality-review.md` - source-check notes, assumptions, and gaps for the current MVP slice.
 - `data/course-map-mvp.json` - the first structured course-map slice.
 - `validate_course_map.py` - validates hierarchy, references, and stable learning-objective IDs.
 - `test_course_map.py` - focused tests for the MVP data model.
@@ -70,5 +71,6 @@ The checks confirm:
 - required top-level fields exist
 - learning objective IDs are unique
 - learning objective IDs match the stable ID pattern
+- learning objectives have traceable official-specification references
 - capture-link examples only point to real objective IDs
 - learning resources are not embedded inside the course map

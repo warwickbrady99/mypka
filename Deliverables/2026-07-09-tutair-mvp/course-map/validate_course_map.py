@@ -66,6 +66,10 @@ def validate_course_map(course_map: dict[str, Any]) -> list[str]:
             errors.append(f"Missing statement for objective: {objective_id}")
         if not objective.get("source_ref"):
             errors.append(f"Missing source_ref for objective: {objective_id}")
+        source_trace = objective.get("source_trace", {})
+        for required_trace in ["source_id", "section", "page", "trace_status"]:
+            if not source_trace.get(required_trace):
+                errors.append(f"Missing source_trace.{required_trace} for objective: {objective_id}")
 
     all_keys = collect_nested_keys(course_map)
     forbidden_keys = sorted(RESOURCE_KEYS.intersection(all_keys))
