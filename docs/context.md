@@ -63,9 +63,31 @@ The workspace is plain markdown. The folder itself is the source of truth.
 - The student and parent want to collect exam schemes/specifications and revision guides from the relevant exam boards to create a personalised study framework and learning resources.
 - Publicly available information was not enough to safely confirm exam boards for the student's exact courses.
 - This lightweight context system was added so future Codex chats can continue quickly.
+- TutAIR MVP now exists as a Markdown-first GCSE learning intake and processing lane in `Deliverables/2026-07-09-tutair-mvp/`, with captures landing under `Team Inbox/TutAIR/YYYY/MM/` and processed notes under `Team Inbox/TutAIR/YYYY/MM/processed/`.
+- TutAIR V1 captures either a YouTube URL or UTF-8 pasted text file. YouTube V1 records URL/video ID only; transcript fetching is intentionally not built yet.
+- TutAIR V2 processes one capture Markdown file into an ADHD-friendly learning note with tiny summary, key facts, what this means, exam-style questions, flashcards, next revision task, and exam-board mapping status.
+
+## Active Build: F247 AsdAIr Microsite
+
+- The FastAPI MVP lives at `Deliverables/2026-07-08-f247-asdair-microsite/`.
+- The FastAPI MVP includes the Mum shopping page, Warwick admin dashboard, SQLite persistence, Markdown/JSON/Claude Chrome handoff exports, optional email notification support, tests, manual QA notes, phone shortcut notes, and VPS deployment documentation.
+- On 2026-07-08, the hosting direction changed: V1 should move the public Mum-facing surface to a Vercel-hosted Next.js app, while keeping Warwick processing and Local Brain / `inbox-asdair` local.
+- The Next.js V1 sibling app lives at `Deliverables/2026-07-08-f247-asdair-microsite-nextjs/`.
+- The Next.js app currently ports only the Mum-facing shopping page: private token route, static catalogue, grouped items, quantity controls, `Use usual shop`, notes field, and local confirmation preview.
+- The Next.js app intentionally has no database, no admin dashboard, no cloud file exports, and no Asda login, payment, API, checkout, or order placement.
+- The next implementation step is structured email submission from the Next.js app so Dad/Warwick receives the request by email.
 
 ## Outstanding Tasks
 
+- For TutAIR V3, add a better source-content path for YouTube captures, either by reusing TubeAIR transcript capture safely or by supporting pasted transcripts more directly.
+- For TutAIR V3, decide where durable processed GCSE resources should live after inbox processing: remain in `Team Inbox/TutAIR/.../processed/`, move to `PKM/Documents/`, or create a dedicated GCSE resource area.
+- For TutAIR V3, add batch processing for pending TutAIR captures once the single-file workflow feels right.
+- For TutAIR V3, improve the deterministic processor so URL-only captures do not produce weak learning notes without actual transcript or pasted content.
+- Add structured email submission to the Next.js AsdAIr app.
+- Decide which email provider to use for Vercel deployment, such as Resend, Postmark, SendGrid, or SMTP-compatible service.
+- Replace the Next.js local confirmation preview with a real submit/sent/error flow after email is wired.
+- Run browser QA for the Next.js Mum page locally and then on Vercel.
+- Later, decide whether to add webhook or local inbox automation from the email/request into Local Brain / `inbox-asdair`.
 - Confirm the exam board and qualification for each subject.
 - Confirm tier where relevant, especially Maths and Science.
 - Confirm current year group and upcoming mock/exam dates.
@@ -73,7 +95,7 @@ The workspace is plain markdown. The folder itself is the source of truth.
 - Create goals and projects for revision once the student has target outcomes or exam dates.
 - Gather official specifications, assessment objectives, past-paper links, and revision-guide references for each confirmed board.
 - Build a personalised revision framework: topic checklist, weak-area tracker, weekly plan, practice-question rota, and tutoring prompts.
-- Decide whether to create a dedicated `Deliverables/` folder for the GCSE study framework.
+- Decide whether TutAIR should become the dedicated `Deliverables/` folder for the GCSE study framework or remain a capture/processing subproject.
 
 ## Important Conventions And Rules
 

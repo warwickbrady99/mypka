@@ -78,3 +78,40 @@ Answer `docs/business/questions-for-me.md`, then use those answers to narrow the
 ## Token-Saving Note
 
 When the context changes significantly, start a new Codex chat and point it to these docs so future work can continue without relying on chat history.
+
+## 2026-07-08 - F247 AsdAIr FastAPI MVP completed
+
+- Completed the FastAPI MVP in `Deliverables/2026-07-08-f247-asdair-microsite/`.
+- MVP scope: Mum shopping page, Warwick admin dashboard, SQLite, Markdown/JSON exports, Claude Chrome handoff export, optional email notifications, tests, manual QA checklist, phone shortcut guide, and VPS deployment notes.
+- Safety boundary preserved: this is a shopping request and basket-preparation aid only. No Asda login, payment, checkout, API, or order placement.
+- The FastAPI implementation remains the reference MVP and should not be deleted or overwritten during the Next.js migration.
+
+## 2026-07-08 - AsdAIr hosting pivot to Next.js/Vercel
+
+- Reviewed the completed FastAPI implementation and compared FastAPI/VPS with Next.js/Vercel for this specific project.
+- Decision: V1 should use GitHub -> Vercel -> Mum-facing Next.js app -> structured email -> Warwick/local processing -> Local Brain / `inbox-asdair`.
+- Keep local for V1: SQLite, admin dashboard, filesystem exports, Claude Chrome handoff files, Local Brain intake, and final Asda basket/checkout workflow.
+- Move to Vercel for V1: Mum-facing private page, static catalogue, form submission endpoint, and structured email notification.
+- Recommended avoiding cloud database/admin until the email workflow is trusted.
+
+## 2026-07-08 - Next.js V1 Mum page port
+
+- Created the sibling app `Deliverables/2026-07-08-f247-asdair-microsite-nextjs/`.
+- Ported only the Mum-facing page from the FastAPI MVP: private token route, grouped shopping items, quantity buttons, `Use usual shop`, `Anything else?`, and confirmation preview.
+- Ported the starter catalogue into `lib/catalogue.ts`.
+- Added local app docs in the Next.js `README.md`.
+- Installed dependencies with bundled `pnpm`; `pnpm` reported an ignored-build-scripts approval gate for native packages, but the app built successfully by invoking Next directly.
+- Current limitation: browser-level local QA was not completed because the sandbox blocked launching a hidden dev server from the session.
+- Next step: add structured email submission, then replace the local preview with a real sent/error confirmation.
+
+## 2026-07-09 - TutAIR MVP V1/V2 completed
+
+- Created `Team Inbox/TutAIR/README.md` as the GCSE learning intake lane.
+- Created `Team Knowledge/Workstreams/WS-005-process-tutair-captures.md` and added it to the Workstreams index.
+- Created `Deliverables/2026-07-09-tutair-mvp/` with capture and processed-note templates, beginner instructions, intake and processor scripts, focused tests, and local `.gitignore`.
+- V1 intake creates Markdown captures from either a YouTube URL or UTF-8 pasted text file and saves them under `Team Inbox/TutAIR/YYYY/MM/`.
+- V2 processor reads one TutAIR capture Markdown file and writes an ADHD-friendly processed note under `Team Inbox/TutAIR/YYYY/MM/processed/`.
+- Exam-board mapping remains `unconfirmed` by default and is only treated as confirmed when status and evidence are both present.
+- Cleanup removed generated Python cache, temporary test inbox files, and placeholder TutAIR test captures from the real inbox.
+- Out of scope: web dashboard, TubeAIR behavior changes, automatic YouTube transcript fetching, AI enrichment, batch processing, and confirmed exam-board/spec mapping.
+- Next best step: TutAIR V3 should add a safe source-content path for YouTube transcripts, then batch-process pending captures once the single-file workflow is trusted.
