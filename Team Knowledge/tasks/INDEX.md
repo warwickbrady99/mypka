@@ -1,23 +1,25 @@
-# Tasks Index
+﻿# Tasks Index
 
 _Auto-generated. Do not edit by hand. Run `SOP-rebuild-task-index` to regenerate._
 
-_Last rebuilt: (never — first generation will fill this)_
+_Last rebuilt: 2026-07-09T10:42:06Z_
 
 ## Summary
-- Open: 0
+- Open: 1
 - In progress: 0 (0 blocked)
 - Done (this month): 0
 - Cancelled (this month): 0
 
-## Open (0)
-_(none yet — see [[SOP-create-task]] to add one)_
+## Open (1)
+
+### Priority 2 - high
+- [[tsk-2026-07-09-001-confirm-tutair-gcse-course-map]] - Confirm TutAIR GCSE course map - assignee: pax - created 2026-07-09
 
 ## In progress (0)
 _(none)_
 
 ## By assignee
-_(populated on first rebuild)_
+- pax: 1 open, 0 in-progress (0 blocked)
 
 ## Recently closed (last 7 days)
 _(none)_

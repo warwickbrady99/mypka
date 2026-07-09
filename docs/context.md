@@ -67,6 +67,9 @@ The workspace is plain markdown. The folder itself is the source of truth.
 - TutAIR V1 captures either a YouTube URL or UTF-8 pasted text file. YouTube V1 records URL/video ID only; transcript fetching is intentionally not built yet.
 - TutAIR V2 processes one capture Markdown file into an ADHD-friendly learning note with tiny summary, key facts, what this means, exam-style questions, flashcards, next revision task, and exam-board mapping status.
 - TutAIR V3 adds a local read-only web viewer in `Deliverables/2026-07-09-tutair-mvp/tutair_viewer.py`. It reads processed notes from `Team Inbox/TutAIR/YYYY/MM/processed/`, groups them by subject, and displays the ADHD-friendly sections.
+- TutAIR now has an approved 6 to 12 month product plan at `Deliverables/2026-07-09-tutair-product-roadmap.md`.
+- TutAIR operating rule from 2026-07-09: build one milestone at a time; do not move to the next milestone until the current one is complete, tested, documented, and committed.
+- Active TutAIR milestone task: `Team Knowledge/tasks/open/tsk-2026-07-09-001-confirm-tutair-gcse-course-map.md`.
 
 ## Active Build: F247 AsdAIr Microsite
 
@@ -81,6 +84,7 @@ The workspace is plain markdown. The folder itself is the source of truth.
 ## Outstanding Tasks
 
 - For TutAIR V3, add a better source-content path for YouTube captures, either by reusing TubeAIR transcript capture safely or by supporting pasted transcripts more directly.
+- For TutAIR Milestone 1, confirm the GCSE course map before moving to source-content pipeline work.
 - For TutAIR V3, decide where durable processed GCSE resources should live after inbox processing: remain in `Team Inbox/TutAIR/.../processed/`, move to `PKM/Documents/`, or create a dedicated GCSE resource area.
 - For TutAIR V3, add batch processing for pending TutAIR captures once the single-file workflow feels right.
 - For TutAIR V3, improve the deterministic processor so URL-only captures do not produce weak learning notes without actual transcript or pasted content.

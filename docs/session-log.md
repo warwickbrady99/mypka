@@ -124,3 +124,10 @@ When the context changes significantly, start a new Codex chat and point it to t
 - Added `test_tutair_viewer.py` and updated the TutAIR README and beginner instructions with local run steps.
 - V3 intentionally does not publish online, edit Markdown, change TubeAIR, fetch YouTube transcripts, add a database, or rebuild TutAIR from scratch.
 - Check run: `python -m unittest test_tutair_intake.py test_tutair_process.py test_tutair_viewer.py` passed with 16 tests.
+
+## 2026-07-09 - TutAIR roadmap approved as product plan
+
+- Created `Deliverables/2026-07-09-tutair-product-roadmap.md` as the 6 to 12 month TutAIR product plan.
+- The user approved the roadmap and set the operating rule: build one milestone at a time, and do not move to the next milestone until the current one is complete, tested, documented, and committed.
+- Created `Team Knowledge/tasks/open/tsk-2026-07-09-001-confirm-tutair-gcse-course-map.md` for Milestone 1.
+- Next work: confirm the GCSE course map before building Milestone 2.
