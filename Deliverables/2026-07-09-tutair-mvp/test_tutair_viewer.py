@@ -4,7 +4,7 @@ import unittest
 from datetime import date
 from pathlib import Path
 
-from tutair_intake import TutairCapture, save_capture
+from tutair_intake import TutairCapture, save_capture, save_source_content, with_source_content_fields
 from tutair_process import process_capture
 from tutair_viewer import find_processed_notes, parse_processed_note, render_home
 
@@ -57,21 +57,20 @@ class TestTutairViewer(unittest.TestCase):
 
 
 def make_processed_note(root: Path) -> Path:
-    capture_path = save_capture(
-        TutairCapture(
-            source_type="pasted_text",
-            subject="Science",
-            topic="Cell division",
-            source_url="",
-            learning_content=(
-                "Mitosis makes new body cells. "
-                "The parent cell divides to make two identical daughter cells. "
-                "This helps organisms grow and repair tissue."
-            ),
-            captured_on=date(2026, 7, 9),
+    capture = TutairCapture(
+        source_type="pasted_text",
+        subject="Science",
+        topic="Cell division",
+        source_url="",
+        learning_content=(
+            "Mitosis makes new body cells. "
+            "The parent cell divides to make two identical daughter cells. "
+            "This helps organisms grow and repair tissue."
         ),
-        root,
+        captured_on=date(2026, 7, 9),
     )
+    source_path = save_source_content(capture, root)
+    capture_path = save_capture(with_source_content_fields(capture, source_path), root)
     return process_capture(capture_path)
 
 

@@ -21,6 +21,9 @@ class TutairCapture:
     source_url: str
     learning_content: str
     captured_on: date
+    source_content_status: str = "needs_source_content"
+    source_content_path: str = ""
+    processing_readiness: str = "blocked_needs_source_content"
     confidence_level: str = "low"
     possible_exam_board: str = "unknown"
     exam_board_status: str = "unconfirmed"
@@ -40,10 +43,14 @@ def slugify(value: str) -> str:
 
 def build_capture_markdown(capture: TutairCapture) -> str:
     source_url = capture.source_url or ""
+    source_content_path = capture.source_content_path or ""
     return f"""---
 type: tutair_learning_capture
-handoff_status: captured_pending_processing
+handoff_status: {capture.processing_readiness}
 source_type: {capture.source_type}
+source_content_status: {capture.source_content_status}
+source_content_path: {source_content_path}
+processing_readiness: {capture.processing_readiness}
 subject: {capture.subject}
 topic: {capture.topic}
 possible_exam_board: {capture.possible_exam_board}
@@ -63,6 +70,9 @@ tags:
 
 - Source type: {capture.source_type}
 - Source URL: {source_url}
+- Source content status: {capture.source_content_status}
+- Source content path: {source_content_path}
+- Processing readiness: {capture.processing_readiness}
 - Source title:
 - Captured on: {capture.captured_on.isoformat()}
 
@@ -84,6 +94,11 @@ Do not mark an exam board as confirmed unless the evidence is known.
 
 {capture.learning_content.strip()}
 
+## Source Content Link
+
+- Raw source content file: {source_content_path}
+- Rule: process this capture only when `source_content_status` is `ready`.
+
 ## Processing Notes
 
 - What looks useful?
@@ -100,6 +115,37 @@ def save_capture(capture: TutairCapture, inbox_root: Path | None = None) -> Path
     output_path = out_dir / f"{capture.captured_on.isoformat()}-{topic_slug}.md"
     output_path.write_text(build_capture_markdown(capture), encoding="utf-8")
     return output_path
+
+
+def save_source_content(capture: TutairCapture, inbox_root: Path | None = None) -> Path:
+    out_dir = dated_inbox_dir(inbox_root, capture.captured_on) / "source-content"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    topic_slug = slugify(f"source-{capture.subject}-{capture.topic}")
+    output_path = out_dir / f"{capture.captured_on.isoformat()}-{topic_slug}.txt"
+    output_path.write_text(capture.learning_content.strip() + "\n", encoding="utf-8")
+    return output_path
+
+
+def with_source_content_fields(capture: TutairCapture, source_content_path: Path | None) -> TutairCapture:
+    if source_content_path:
+        return TutairCapture(
+            source_type=capture.source_type,
+            subject=capture.subject,
+            topic=capture.topic,
+            source_url=capture.source_url,
+            learning_content=capture.learning_content,
+            captured_on=capture.captured_on,
+            source_content_status="ready",
+            source_content_path=str(source_content_path),
+            processing_readiness="ready_for_processing",
+            confidence_level=capture.confidence_level,
+            possible_exam_board=capture.possible_exam_board,
+            exam_board_status=capture.exam_board_status,
+            exam_board_evidence=capture.exam_board_evidence,
+        )
+
+    return capture
 
 
 def detect_source_type(url: str | None, text_file: Path | None) -> str:
@@ -190,6 +236,10 @@ def main(argv: list[str] | None = None) -> int:
         confidence_level=args.confidence_level,
         possible_exam_board=args.possible_exam_board,
     )
+    source_content_path = None
+    if args.text_file:
+        source_content_path = save_source_content(capture, args.inbox_root)
+    capture = with_source_content_fields(capture, source_content_path)
     output_path = save_capture(capture, args.inbox_root)
     print(f"Saved TutAIR capture: {output_path}")
     return 0

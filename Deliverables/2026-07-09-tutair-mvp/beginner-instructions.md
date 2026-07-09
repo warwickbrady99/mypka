@@ -20,7 +20,7 @@ You can also use the V1 command:
 python .\tutair_intake.py --text-file ".\my-learning-text.txt" --subject "Science" --topic "Cell division"
 ```
 
-For YouTube, the current command records the URL. It does not fetch the transcript yet:
+For YouTube, the current command records the URL and marks the capture as waiting for source content:
 
 ```powershell
 python .\tutair_intake.py --url "https://www.youtube.com/watch?v=abcdefghijk" --subject "Science" --topic "Cell division"
@@ -32,6 +32,12 @@ Name it with the date and a short topic slug, for example:
 2026-07-09-gcse-biology-cell-division.md
 ```
 
+When you use a text file, TutAIR also saves the raw source text under:
+
+```text
+Team Inbox/TutAIR/YYYY/MM/source-content/
+```
+
 ## Step 2 - Fill In The Basics
 
 Add what you know:
@@ -41,7 +47,9 @@ Add what you know:
 - source URL, if there is one
 - date captured
 - confidence level
-- pasted source text or transcript
+- source-content status
+- path to the raw source text when available
+- pasted source text or transcript preview
 
 If you are not sure about the exam board, write:
 
@@ -50,6 +58,8 @@ possible_exam_board: unknown
 exam_board_status: unconfirmed
 exam_board_evidence: none
 ```
+
+Do not process a YouTube URL-only capture yet. It needs transcript text first, either pasted manually or captured through TubeAIR.
 
 ## Step 3 - Make A Learning Note
 
@@ -129,5 +139,5 @@ Team Inbox/TutAIR/YYYY/MM/processed/
 - TutAIR is Markdown-first.
 - TutAIR V3 has a local read-only viewer, not a public web dashboard.
 - TutAIR does not change TubeAIR.
-- TutAIR does not fetch YouTube transcripts yet.
+- TutAIR does not fetch YouTube transcripts itself yet. It can reuse TubeAIR transcript captures by linking or importing the transcript text as source content.
 - TutAIR does not confirm exam boards without evidence.

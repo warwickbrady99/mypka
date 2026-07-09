@@ -16,13 +16,33 @@ class ParsedCapture:
     path: Path
     metadata: dict[str, str]
     raw_learning_content: str
+    source_content: str
 
 
 def parse_capture(path: Path) -> ParsedCapture:
     text = path.read_text(encoding="utf-8")
     metadata = parse_frontmatter(text)
     raw_content = extract_section(text, "Raw Learning Content")
-    return ParsedCapture(path=path, metadata=metadata, raw_learning_content=raw_content)
+    source_content = read_source_content(path, metadata, raw_content)
+    return ParsedCapture(
+        path=path,
+        metadata=metadata,
+        raw_learning_content=raw_content,
+        source_content=source_content,
+    )
+
+
+def read_source_content(capture_path: Path, metadata: dict[str, str], fallback: str) -> str:
+    source_content_path = metadata.get("source_content_path", "").strip()
+    if not source_content_path:
+        return fallback
+
+    path = Path(source_content_path)
+    if not path.is_absolute():
+        path = capture_path.parent / path
+    if not path.exists():
+        raise FileNotFoundError(f"Source content file does not exist: {path}")
+    return path.read_text(encoding="utf-8")
 
 
 def parse_frontmatter(text: str) -> dict[str, str]:
@@ -56,6 +76,7 @@ def extract_section(text: str, heading: str) -> str:
 
 
 def build_processed_note(capture: ParsedCapture, created_on: date | None = None) -> str:
+    validate_processing_readiness(capture)
     created = created_on or date.today()
     metadata = capture.metadata
     subject = metadata.get("subject", "needs adding")
@@ -69,7 +90,9 @@ def build_processed_note(capture: ParsedCapture, created_on: date | None = None)
     confidence_level = metadata.get("confidence_level", "low")
     source_url = metadata.get("source_url", "")
     raw_capture = str(capture.path)
-    content = capture.raw_learning_content.strip()
+    source_content_path = metadata.get("source_content_path", "")
+    source_content_status = metadata.get("source_content_status", "legacy_inline")
+    content = capture.source_content.strip()
     facts = choose_key_facts(content)
     tiny_summary = build_tiny_summary(content, subject, topic)
     what_this_means = build_plain_explanation(content, topic)
@@ -77,6 +100,8 @@ def build_processed_note(capture: ParsedCapture, created_on: date | None = None)
     return f"""---
 type: tutair_learning_resource
 source_capture: {raw_capture}
+source_content: {source_content_path}
+source_content_status: {source_content_status}
 subject: {subject}
 topic: {topic}
 possible_exam_board: {possible_exam_board}
@@ -136,8 +161,22 @@ Do not turn possible mapping into fact without evidence from an official specifi
 ## Source Link
 
 - Raw capture: {raw_capture}
+- Raw source content: {source_content_path}
 - Source URL: {source_url}
 """
+
+
+def validate_processing_readiness(capture: ParsedCapture) -> None:
+    status = capture.metadata.get("source_content_status", "legacy_inline").strip().lower()
+    readiness = capture.metadata.get("processing_readiness", "ready_for_processing").strip().lower()
+    content = capture.source_content.strip()
+
+    if status == "needs_source_content" or readiness == "blocked_needs_source_content":
+        raise ValueError(
+            "TutAIR capture is blocked: add transcript, lesson text, or another raw source content file before processing."
+        )
+    if not content:
+        raise ValueError("TutAIR capture has no source content to process.")
 
 
 def safe_exam_board_status(status: str, evidence: str) -> str:

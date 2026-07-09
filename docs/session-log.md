@@ -149,3 +149,13 @@ When the context changes significantly, start a new Codex chat and point it to t
 - Added `quality-review.md` to document review results, assumptions, and known gaps. The slice remains partial by design and does not yet cover all of AQA 8464 section 4.1.
 - Updated schema docs and validation tests for traceable official-specification references.
 - Check run: course-map tests passed with 7 tests, `validate_course_map.py` passed, and the existing TutAIR intake/process/viewer tests passed with 16 tests.
+
+## 2026-07-09 - TutAIR Milestone 2 source-content foundation
+
+- Began Milestone 2 after the user confirmed Milestone 1 was completed, tested, documented, committed, and pushed.
+- Marked the Milestone 1 course-map task done and created the active Milestone 2 source-content pipeline task.
+- Added a separate raw source-content layer under `Team Inbox/TutAIR/YYYY/MM/source-content/` for pasted transcript or lesson text.
+- Updated capture metadata to record `source_content_status`, `source_content_path`, and `processing_readiness`.
+- Updated processing so URL-only captures are blocked until actual transcript, lesson text, or source content exists.
+- Documented the three layers: raw source, TutAIR capture metadata/extracted content, and processed learning resources.
+- TubeAIR remains the owner of YouTube transcript capture; TutAIR reuses that architecture by linking or importing transcript text rather than duplicating the listener.

@@ -69,9 +69,10 @@ The workspace is plain markdown. The folder itself is the source of truth.
 - TutAIR V3 adds a local read-only web viewer in `Deliverables/2026-07-09-tutair-mvp/tutair_viewer.py`. It reads processed notes from `Team Inbox/TutAIR/YYYY/MM/processed/`, groups them by subject, and displays the ADHD-friendly sections.
 - TutAIR now has an approved 6 to 12 month product plan at `Deliverables/2026-07-09-tutair-product-roadmap.md`.
 - TutAIR operating rule from 2026-07-09: build one milestone at a time; do not move to the next milestone until the current one is complete, tested, documented, and committed.
-- Active TutAIR milestone task: `Team Knowledge/tasks/open/tsk-2026-07-09-001-confirm-tutair-gcse-course-map.md`.
+- Active TutAIR milestone task: `Team Knowledge/tasks/open/tsk-2026-07-09-002-source-content-pipeline.md`.
 - TutAIR Milestone 1 now has a course-map MVP at `Deliverables/2026-07-09-tutair-mvp/course-map/`. It defines the reusable hierarchy, stable learning objective IDs, validation tests, and a small AQA GCSE Combined Science: Trilogy 8464 Biology Paper 1 / Cell biology slice.
 - The course-map MVP has had a quality pass against the official AQA 8464 specification. Learning objectives now include traceable `source_trace` references, the schema documents those references, and `quality-review.md` records assumptions and known gaps.
+- TutAIR Milestone 2 has started. Text-file intake now stores raw source text separately under `Team Inbox/TutAIR/YYYY/MM/source-content/`; capture Markdown records source-content status/path/readiness; processing reads ready source content and blocks URL-only captures until transcript or lesson text exists.
 
 ## Active Build: F247 AsdAIr Microsite
 
@@ -85,11 +86,11 @@ The workspace is plain markdown. The folder itself is the source of truth.
 
 ## Outstanding Tasks
 
-- For TutAIR V3, add a better source-content path for YouTube captures, either by reusing TubeAIR transcript capture safely or by supporting pasted transcripts more directly.
+- For TutAIR Milestone 2, extend the source-content path so TubeAIR YouTube transcript captures can be linked or imported into TutAIR without duplicating TubeAIR behavior.
 - For TutAIR Milestone 1, do not expand beyond the current AQA 8464 Biology Paper 1 / Cell biology MVP slice until the user explicitly asks. The slice is quality-reviewed but intentionally partial; known gaps are documented in `Deliverables/2026-07-09-tutair-mvp/course-map/quality-review.md`.
 - For TutAIR V3, decide where durable processed GCSE resources should live after inbox processing: remain in `Team Inbox/TutAIR/.../processed/`, move to `PKM/Documents/`, or create a dedicated GCSE resource area.
 - For TutAIR V3, add batch processing for pending TutAIR captures once the single-file workflow feels right.
-- For TutAIR V3, improve the deterministic processor so URL-only captures do not produce weak learning notes without actual transcript or pasted content.
+- For TutAIR Milestone 2, keep URL-only captures blocked from processing unless source content is attached.
 - For TutAIR V4, decide whether the local viewer should become a fuller dashboard with search, filters, and launch scripts after real notes exist.
 - Add structured email submission to the Next.js AsdAIr app.
 - Decide which email provider to use for Vercel deployment, such as Resend, Postmark, SendGrid, or SMTP-compatible service.

@@ -5,10 +5,12 @@ TutAIR is a small GCSE revision helper for myPKA.
 It starts simple:
 
 ```text
-YouTube link or pasted learning text -> TutAIR inbox -> ADHD-friendly revision note
+YouTube link or pasted learning text -> raw source content -> TutAIR capture -> ADHD-friendly revision note
 ```
 
 This MVP does not build the web dashboard yet. It gives TutAIR a safe local intake and processing path.
+
+Milestone 2 adds the source-content foundation: raw source text is stored separately, capture Markdown records metadata and readiness, and processed resources are generated only when source content is ready.
 
 ## Files In This Folder
 
@@ -43,7 +45,13 @@ The command saves Markdown under:
 Team Inbox/TutAIR/YYYY/MM/
 ```
 
-For YouTube URLs, V1 records the URL and video ID. It does not fetch a transcript yet. For useful processed notes today, paste transcript or lesson text through `--text-file`.
+For YouTube URLs, TutAIR records the URL and video ID, then marks the capture as `needs_source_content`. For useful processed notes today, paste transcript or lesson text through `--text-file`.
+
+When you use `--text-file`, TutAIR also saves the raw source text under:
+
+```text
+Team Inbox/TutAIR/YYYY/MM/source-content/
+```
 
 ## V2 Processor Command
 
@@ -70,6 +78,8 @@ The processor fills:
 - Exam Board Mapping
 
 It keeps exam-board mapping unconfirmed unless the capture has both `exam_board_status: confirmed` and real evidence in `exam_board_evidence`.
+
+URL-only captures are blocked from processing until transcript, lesson text, or another raw source-content file is attached. This prevents TutAIR from turning a bare URL into a weak learning resource.
 
 Exam-board mapping is unconfirmed by default. You can record a possible board, but that still stays unconfirmed:
 
@@ -146,3 +156,25 @@ Deliverables/2026-07-09-tutair-mvp/course-map/
 ```
 
 The first MVP slice maps a small official-specification-backed AQA GCSE Combined Science: Trilogy Biology Paper 1 / Cell biology branch. Future captures should link to one or more stable learning objective IDs instead of copying the course-map hierarchy.
+
+## Source Content Pipeline
+
+TutAIR now uses three distinct layers:
+
+```text
+Raw source content -> TutAIR capture metadata -> Processed learning resource
+```
+
+### Raw source
+
+Raw source is the actual transcript, lesson text, textbook extract, or copied note. It is evidence. For pasted text intake, it is stored as a `.txt` file in `Team Inbox/TutAIR/YYYY/MM/source-content/`.
+
+TubeAIR already captures YouTube transcripts into `Team Inbox/TubeAIR/YYYY/MM/`. TutAIR should reuse that capability by linking or importing the resulting transcript text into the TutAIR source-content layer, rather than rebuilding the TubeAIR Telegram/transcript listener.
+
+### Extracted content
+
+The TutAIR capture Markdown is the extracted/handoff record. It stores subject, topic, source URL, source-content status, processing readiness, and future course-map links. It should stay light and point back to the raw source.
+
+### Processed learning resources
+
+Processed resources live under `Team Inbox/TutAIR/YYYY/MM/processed/` for the MVP. They are student-facing revision notes generated from ready source content. They should later link to stable course-map learning objective IDs.

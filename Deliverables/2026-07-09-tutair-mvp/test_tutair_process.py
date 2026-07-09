@@ -4,12 +4,13 @@ import unittest
 from datetime import date
 from pathlib import Path
 
-from tutair_intake import TutairCapture, save_capture
+from tutair_intake import TutairCapture, save_capture, save_source_content, with_source_content_fields
 from tutair_process import (
     build_processed_note,
     default_output_path,
     parse_capture,
     process_capture,
+    read_source_content,
     safe_exam_board_status,
 )
 
@@ -23,7 +24,7 @@ class TestTutairProcess(unittest.TestCase):
 
             self.assertEqual(parsed.metadata["subject"], "Science")
             self.assertEqual(parsed.metadata["topic"], "Cell division")
-            self.assertIn("Mitosis makes new body cells.", parsed.raw_learning_content)
+            self.assertIn("Mitosis makes new body cells.", parsed.source_content)
         finally:
             shutil.rmtree(temp_dir)
 
@@ -82,26 +83,63 @@ class TestTutairProcess(unittest.TestCase):
             self.assertEqual(output_path.parent.name, "processed")
             self.assertIn("# Science - Cell division", text)
             self.assertIn("- Status: unconfirmed", text)
+            self.assertIn("source_content_status: ready", text)
+        finally:
+            shutil.rmtree(temp_dir)
+
+    def test_process_capture_blocks_url_only_capture_without_source_content(self):
+        temp_dir = Path(tempfile.mkdtemp(prefix="tutair-process-"))
+        try:
+            capture_path = save_capture(
+                TutairCapture(
+                    source_type="youtube_url",
+                    subject="Science",
+                    topic="Cell division",
+                    source_url="https://www.youtube.com/watch?v=abcdefghijk",
+                    learning_content="YouTube educational URL captured for TutAIR processing.",
+                    captured_on=date(2026, 7, 9),
+                ),
+                temp_dir,
+            )
+
+            with self.assertRaisesRegex(ValueError, "blocked"):
+                process_capture(capture_path)
+        finally:
+            shutil.rmtree(temp_dir)
+
+    def test_read_source_content_uses_separate_file_when_present(self):
+        temp_dir = Path(tempfile.mkdtemp(prefix="tutair-process-"))
+        try:
+            capture_path = make_capture(temp_dir)
+            parsed = parse_capture(capture_path)
+
+            source_text = read_source_content(
+                capture_path,
+                parsed.metadata,
+                "Fallback text should not be used.",
+            )
+
+            self.assertIn("The parent cell divides", source_text)
+            self.assertNotIn("Fallback text", source_text)
         finally:
             shutil.rmtree(temp_dir)
 
 
 def make_capture(root: Path) -> Path:
-    return save_capture(
-        TutairCapture(
-            source_type="pasted_text",
-            subject="Science",
-            topic="Cell division",
-            source_url="",
-            learning_content=(
-                "Mitosis makes new body cells. "
-                "The parent cell divides to make two identical daughter cells. "
-                "This helps organisms grow and repair tissue."
-            ),
-            captured_on=date(2026, 7, 9),
+    capture = TutairCapture(
+        source_type="pasted_text",
+        subject="Science",
+        topic="Cell division",
+        source_url="",
+        learning_content=(
+            "Mitosis makes new body cells. "
+            "The parent cell divides to make two identical daughter cells. "
+            "This helps organisms grow and repair tissue."
         ),
-        root,
+        captured_on=date(2026, 7, 9),
     )
+    source_path = save_source_content(capture, root)
+    return save_capture(with_source_content_fields(capture, source_path), root)
 
 
 if __name__ == "__main__":

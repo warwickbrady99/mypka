@@ -12,7 +12,7 @@ TutAIR turns GCSE learning material into clear, small, reviewable resources.
 The goal is:
 
 ```text
-YouTube URL or pasted text -> raw TutAIR capture -> ADHD-friendly learning note -> linked GCSE revision resource -> later web dashboard
+YouTube URL or pasted text -> raw source content -> TutAIR capture metadata -> ADHD-friendly learning note -> linked GCSE revision resource -> later web dashboard
 ```
 
 TutAIR is like TubeAIR in spirit, but its job is GCSE learning rather than general YouTube knowledge capture.
@@ -46,12 +46,28 @@ Raw capture notes use:
 
 ```yaml
 type: tutair_learning_capture
-handoff_status: captured_pending_processing
+source_content_status: ready
+processing_readiness: ready_for_processing
 ```
 
 ## Output Layers
 
-### Layer 1 - Raw Capture
+### Layer 1 - Raw Source
+
+Location:
+
+```text
+Team Inbox/TutAIR/YYYY/MM/source-content/
+```
+
+Rules:
+
+- Keep the actual transcript, lesson text, textbook extract, or copied note available.
+- Do not overwrite raw source text when processed resources change.
+- Preserve source URL in the capture metadata when there is one.
+- Reuse TubeAIR's YouTube transcript capture path when possible. TubeAIR lands YouTube transcripts under `Team Inbox/TubeAIR/YYYY/MM/`; TutAIR should link or import that transcript text into the TutAIR source-content layer instead of duplicating the Telegram/transcript listener.
+
+### Layer 2 - Capture Metadata
 
 Location:
 
@@ -61,12 +77,14 @@ Team Inbox/TutAIR/YYYY/MM/
 
 Rules:
 
-- Keep the source text available.
+- Store handoff metadata, not the only copy of the source.
 - Preserve the source URL when there is one.
 - Record subject, topic, possible exam board, capture date, and confidence level.
+- Record `source_content_status`, `source_content_path`, and `processing_readiness`.
 - Mark exam-board status as `unconfirmed` unless evidence is known.
+- Mark URL-only captures as `needs_source_content` and block processing.
 
-### Layer 2 - ADHD-Friendly Learning Note
+### Layer 3 - ADHD-Friendly Learning Note
 
 Location for MVP processed notes:
 
@@ -86,13 +104,13 @@ Body sections:
 - `## Next Revision Task`
 - `## Exam Board Mapping`
 
-### Layer 3 - GCSE Mapping
+### Layer 4 - GCSE Mapping
 
 Mapping to exam boards and specifications is evidence-led.
 
 Use [[exam-board-map]] as the source of truth for confirmed subject, board, qualification, tier, and source details. If a source is not confirmed, write `unconfirmed` and name what evidence is missing.
 
-### Layer 4 - Web Dashboard
+### Layer 5 - Web Dashboard
 
 The dashboard is not part of this MVP.
 
@@ -109,22 +127,25 @@ Markdown remains canonical. A database or dashboard index may be generated later
 
 ## MVP Processing Procedure
 
-1. **Capture the source.**
-   Save the YouTube URL or pasted text into `Team Inbox/TutAIR/YYYY/MM/`.
+1. **Capture or attach raw source content.**
+   Save transcript, lesson text, textbook extract, or copied notes under `Team Inbox/TutAIR/YYYY/MM/source-content/` when available. For a YouTube URL, use TubeAIR's transcript capture route when available rather than rebuilding it inside TutAIR.
 
 2. **Add metadata.**
-   Include subject, topic, possible exam board, source URL, captured date, confidence level, and exam-board confirmation status.
+   Create a TutAIR capture under `Team Inbox/TutAIR/YYYY/MM/`. Include subject, topic, possible exam board, source URL, captured date, confidence level, source-content status, source-content path, processing readiness, and exam-board confirmation status.
 
-3. **Create the learning note.**
-   Run `tutair_process.py` on one capture, or use the processed learning note template manually. Save the result under `Team Inbox/TutAIR/YYYY/MM/processed/`.
+3. **Check readiness.**
+   Process only captures with `source_content_status: ready` and `processing_readiness: ready_for_processing`. Leave URL-only captures blocked as `needs_source_content`.
 
-4. **Separate facts from guesses.**
+4. **Create the learning note.**
+   Run `tutair_process.py` on one ready capture, or use the processed learning note template manually. Save the result under `Team Inbox/TutAIR/YYYY/MM/processed/`.
+
+5. **Separate facts from guesses.**
    Facts from the source can be summarized. Exam-board mapping stays unconfirmed unless evidence is known.
 
-5. **Suggest the next revision task.**
+6. **Suggest the next revision task.**
    End with one small task that can be completed in 5 to 15 minutes.
 
-6. **Defer dashboard work.**
+7. **Defer dashboard work.**
    Do not build web UI until the capture and note shapes are useful.
 
 ## Current Implementation
@@ -132,8 +153,11 @@ Markdown remains canonical. A database or dashboard index may be generated later
 The MVP implementation lives in `Deliverables/2026-07-09-tutair-mvp/`.
 
 - `tutair_intake.py` creates capture Markdown from a YouTube URL or UTF-8 text file.
+- Text-file intake now writes raw source text under `Team Inbox/TutAIR/YYYY/MM/source-content/` and links the capture to it.
+- URL-only intake now marks captures as `needs_source_content` and blocks processing until content is attached.
 - `tutair_process.py` creates one ADHD-friendly processed note from one capture Markdown file.
-- YouTube intake currently records the URL and video ID only. Transcript fetching is intentionally out of scope for this MVP.
+- `tutair_process.py` reads ready source content from `source_content_path` and refuses URL-only captures.
+- YouTube transcript fetching remains owned by TubeAIR for now; TutAIR should consume the resulting transcript content.
 - Processing is deterministic and Markdown-first. It does not call an AI model.
 
 ## Definition Of Done For MVP
@@ -146,6 +170,8 @@ The MVP implementation lives in `Deliverables/2026-07-09-tutair-mvp/`.
 - V1 intake command exists.
 - V2 processor command exists.
 - Focused tests exist for intake and processing.
+- URL-only captures are blocked from weak processing.
+- Raw source content is stored separately from processed learning resources.
 - No TubeAIR behavior has changed.
 - No web dashboard has been built.
 - Exam-board claims are clearly marked as confirmed or unconfirmed.
