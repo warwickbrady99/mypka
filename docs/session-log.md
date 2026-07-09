@@ -131,3 +131,12 @@ When the context changes significantly, start a new Codex chat and point it to t
 - The user approved the roadmap and set the operating rule: build one milestone at a time, and do not move to the next milestone until the current one is complete, tested, documented, and committed.
 - Created `Team Knowledge/tasks/open/tsk-2026-07-09-001-confirm-tutair-gcse-course-map.md` for Milestone 1.
 - Next work: confirm the GCSE course map before building Milestone 2.
+
+## 2026-07-09 - TutAIR Milestone 1 course-map MVP
+
+- Added `Deliverables/2026-07-09-tutair-mvp/course-map/` as the separate canonical course-map layer.
+- Defined the reusable hierarchy: Subject -> Qualification -> Exam Board -> Tier -> Paper -> Topic -> Sub-topic -> Learning Objective.
+- Added stable learning objective IDs and a small AQA GCSE Combined Science: Trilogy 8464 Biology Paper 1 / Cell biology MVP slice.
+- Added beginner instructions, schema documentation, a JSON data file, a validator, and focused unit tests.
+- Updated `docs/exam-board-map.md` to reference the course-map MVP while preserving the warning that the student's personal Science route and tier are still unconfirmed.
+- Check run: bundled Python `-m unittest test_course_map.py` passed with 5 tests.

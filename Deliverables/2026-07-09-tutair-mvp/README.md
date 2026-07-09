@@ -21,6 +21,7 @@ This MVP does not build the web dashboard yet. It gives TutAIR a safe local inta
 - `test_tutair_process.py` - checks for the V2 processor.
 - `tutair_viewer.py` - small V3 local web viewer for processed TutAIR notes.
 - `test_tutair_viewer.py` - checks for the V3 viewer.
+- `course-map/` - Milestone 1 GCSE course-map MVP, kept separate from learning resources.
 
 ## V1 Intake Command
 
@@ -116,6 +117,12 @@ Run the focused tests from this folder:
 python -m unittest test_tutair_intake.py test_tutair_process.py test_tutair_viewer.py
 ```
 
+Run the course-map MVP checks from `course-map/`:
+
+```powershell
+python -m unittest test_course_map.py
+```
+
 ## Important Rule
 
 TutAIR can write a possible exam board, but it must not treat that as fact unless there is evidence.
@@ -129,3 +136,13 @@ exam_board_evidence: none
 ```
 
 Only mark something as confirmed when it comes from a reliable source such as a teacher, official specification, school document, exam timetable, or confirmed course source.
+
+## Milestone 1 Course Map
+
+The course map is TutAIR's curriculum spine. It lives separately from captures and learning resources in:
+
+```text
+Deliverables/2026-07-09-tutair-mvp/course-map/
+```
+
+The first MVP slice maps a small official-specification-backed AQA GCSE Combined Science: Trilogy Biology Paper 1 / Cell biology branch. Future captures should link to one or more stable learning objective IDs instead of copying the course-map hierarchy.

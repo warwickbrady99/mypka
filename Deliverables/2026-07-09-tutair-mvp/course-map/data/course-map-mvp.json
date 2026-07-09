@@ -1,0 +1,145 @@
+{
+  "schema_version": "0.1.0",
+  "map_id": "tutair-gcse-course-map-mvp",
+  "status": "mvp",
+  "last_updated": "2026-07-09",
+  "source_policy": {
+    "preferred_sources": [
+      "official_exam_board_specification",
+      "official_department_for_education_subject_content",
+      "school_or_teacher_confirmation"
+    ],
+    "student_personal_entry_rule": "A specification can be mapped as an official course source, but the student's personal route and tier remain unconfirmed until school, teacher, timetable, or candidate-entry evidence confirms them."
+  },
+  "subjects": [
+    {
+      "subject_id": "SCI",
+      "name": "Science",
+      "qualifications": [
+        {
+          "qualification_id": "GCSE-COMBINED-SCIENCE-TRILOGY",
+          "name": "GCSE Combined Science: Trilogy",
+          "level": "GCSE",
+          "exam_boards": [
+            {
+              "board_id": "AQA",
+              "name": "AQA",
+              "specification_code": "8464",
+              "source_status": "official_specification",
+              "student_entry_status": "unconfirmed",
+              "sources": [
+                {
+                  "source_id": "AQA-8464-SPEC",
+                  "title": "AQA GCSE Combined Science: Trilogy 8464 specification",
+                  "url": "https://www.aqa.org.uk/subjects/science/gcse/combined-science-trilogy-8464/specification",
+                  "source_type": "official_exam_board_specification",
+                  "accessed_on": "2026-07-09"
+                },
+                {
+                  "source_id": "DFE-GCSE-SUBJECT-CONTENT",
+                  "title": "GCSE subject content",
+                  "url": "https://www.gov.uk/government/collections/gcse-subject-content",
+                  "source_type": "official_department_for_education_subject_content",
+                  "accessed_on": "2026-07-09"
+                }
+              ],
+              "tiers": [
+                {
+                  "tier_id": "shared",
+                  "name": "Shared foundation and higher content",
+                  "applies_to": "Objectives in this MVP are treated as shared until a later tier-specific review marks them otherwise.",
+                  "papers": [
+                    {
+                      "paper_id": "BIO-B1",
+                      "name": "Biology Paper 1",
+                      "assessment_type": "written_exam",
+                      "duration": "1 hour 15 minutes",
+                      "topics": [
+                        {
+                          "topic_id": "CELL-BIOLOGY",
+                          "name": "Cell biology",
+                          "spec_reference": "Biology topic 1",
+                          "subtopics": [
+                            {
+                              "subtopic_id": "CELL-STRUCTURE",
+                              "name": "Cell structure",
+                              "learning_objectives": [
+                                {
+                                  "objective_id": "LO-AQA-8464-BIO-B1-CELL-BIOLOGY-CELL-STRUCTURE-001",
+                                  "statement": "Identify the main structures in animal and plant cells and describe their functions.",
+                                  "source_ref": "AQA 8464 Biology topic 1: Cell biology",
+                                  "status": "derived_from_specification",
+                                  "tier_scope": "shared"
+                                },
+                                {
+                                  "objective_id": "LO-AQA-8464-BIO-B1-CELL-BIOLOGY-CELL-STRUCTURE-002",
+                                  "statement": "Compare eukaryotic and prokaryotic cells using their key structural differences.",
+                                  "source_ref": "AQA 8464 Biology topic 1: Cell biology",
+                                  "status": "derived_from_specification",
+                                  "tier_scope": "shared"
+                                }
+                              ]
+                            },
+                            {
+                              "subtopic_id": "MICROSCOPY",
+                              "name": "Microscopy",
+                              "learning_objectives": [
+                                {
+                                  "objective_id": "LO-AQA-8464-BIO-B1-CELL-BIOLOGY-MICROSCOPY-001",
+                                  "statement": "Use the relationship between magnification, image size, and real size in microscopy calculations.",
+                                  "source_ref": "AQA 8464 Biology topic 1: Cell biology",
+                                  "status": "derived_from_specification",
+                                  "tier_scope": "shared"
+                                },
+                                {
+                                  "objective_id": "LO-AQA-8464-BIO-B1-CELL-BIOLOGY-MICROSCOPY-002",
+                                  "statement": "Describe how microscopy helps scientists observe cell structures that are too small to see with the naked eye.",
+                                  "source_ref": "AQA 8464 Biology topic 1: Cell biology",
+                                  "status": "derived_from_specification",
+                                  "tier_scope": "shared"
+                                }
+                              ]
+                            },
+                            {
+                              "subtopic_id": "CELL-DIVISION",
+                              "name": "Cell division",
+                              "learning_objectives": [
+                                {
+                                  "objective_id": "LO-AQA-8464-BIO-B1-CELL-BIOLOGY-CELL-DIVISION-001",
+                                  "statement": "Explain why cells divide by mitosis for growth and repair.",
+                                  "source_ref": "AQA 8464 Biology topic 1: Cell biology",
+                                  "status": "derived_from_specification",
+                                  "tier_scope": "shared"
+                                },
+                                {
+                                  "objective_id": "LO-AQA-8464-BIO-B1-CELL-BIOLOGY-CELL-DIVISION-002",
+                                  "statement": "Describe the role of stem cells in producing specialised cells.",
+                                  "source_ref": "AQA 8464 Biology topic 1: Cell biology",
+                                  "status": "derived_from_specification",
+                                  "tier_scope": "shared"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "capture_link_examples": [
+    {
+      "capture_type": "tutair_learning_capture",
+      "linked_learning_objectives": [
+        "LO-AQA-8464-BIO-B1-CELL-BIOLOGY-CELL-STRUCTURE-001",
+        "LO-AQA-8464-BIO-B1-CELL-BIOLOGY-MICROSCOPY-001"
+      ]
+    }
+  ]
+}

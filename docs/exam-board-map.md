@@ -103,7 +103,7 @@ This section stores the current working map in more detail. It is useful, but it
 - Qualification type: GCSE Science
 - Exam board: AQA
 - Course / specification: possible Combined Science: Trilogy 8464, or separate sciences: Biology 8461, Chemistry 8462, Physics 8463
-- Specification link: needs adding after route is confirmed
+- Specification link: AQA GCSE Combined Science: Trilogy 8464 official specification is mapped in the TutAIR course-map MVP, but the student's personal route is still unconfirmed
 - Revision guide link or title: needs adding after route and tier are confirmed
 - Tier, if relevant: Foundation or Higher needs confirmation
 - Teacher / class: unknown
@@ -113,7 +113,8 @@ This section stores the current working map in more detail. It is useful, but it
 
 ### Topics / Modules
 
-- [ ] Add Combined Science topic list if the student does AQA Trilogy 8464
+- [x] Add a small AQA Combined Science: Trilogy 8464 Biology Paper 1 / Cell biology course-map MVP in `Deliverables/2026-07-09-tutair-mvp/course-map/`
+- [ ] Expand Combined Science topic list if the student does AQA Trilogy 8464
 - [ ] Add Biology, Chemistry, and Physics topic lists if the student does separate sciences
 
 ### Assessment
@@ -126,6 +127,7 @@ This section stores the current working map in more detail. It is useful, but it
 
 - The most important question is whether the student personally does combined science or separate/triple science.
 - Tier also needs confirming because it changes the revision guide and practice questions.
+- The TutAIR course-map MVP proves the reusable objective-ID structure only. It does not confirm the student's personal Science entry.
 
 ## Computer Science
 
