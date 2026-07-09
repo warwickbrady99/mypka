@@ -55,6 +55,37 @@ class TestTutairViewer(unittest.TestCase):
         finally:
             shutil.rmtree(temp_dir)
 
+    def test_render_home_includes_interactive_dashboard_hooks(self):
+        temp_dir = Path(tempfile.mkdtemp(prefix="tutair-viewer-"))
+        try:
+            make_processed_note(temp_dir)
+            html = render_home(find_processed_notes(temp_dir))
+
+            self.assertIn('data-action="flashcards"', html)
+            self.assertIn('data-action="quiz"', html)
+            self.assertIn('data-action="read-aloud"', html)
+            self.assertIn('data-action="focus"', html)
+            self.assertIn('data-action="mark-reviewed"', html)
+            self.assertIn('data-action="save-topic"', html)
+            self.assertIn("localStorage", html)
+            self.assertIn("speechSynthesis", html)
+            self.assertIn("practice-view", html)
+        finally:
+            shutil.rmtree(temp_dir)
+
+    def test_render_home_embeds_flashcard_and_quiz_data(self):
+        temp_dir = Path(tempfile.mkdtemp(prefix="tutair-viewer-"))
+        try:
+            make_processed_note(temp_dir)
+            html = render_home(find_processed_notes(temp_dir))
+
+            self.assertIn('"flashcards"', html)
+            self.assertIn('"questions"', html)
+            self.assertIn("What topic is this note about?", html)
+            self.assertIn("What is the main idea in this source?", html)
+        finally:
+            shutil.rmtree(temp_dir)
+
 
 def make_processed_note(root: Path) -> Path:
     capture = TutairCapture(

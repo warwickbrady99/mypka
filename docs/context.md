@@ -73,6 +73,7 @@ The workspace is plain markdown. The folder itself is the source of truth.
 - TutAIR Milestone 1 now has a course-map MVP at `Deliverables/2026-07-09-tutair-mvp/course-map/`. It defines the reusable hierarchy, stable learning objective IDs, validation tests, and a small AQA GCSE Combined Science: Trilogy 8464 Biology Paper 1 / Cell biology slice.
 - The course-map MVP has had a quality pass against the official AQA 8464 specification. Learning objectives now include traceable `source_trace` references, the schema documents those references, and `quality-review.md` records assumptions and known gaps.
 - TutAIR Milestone 2 has started. Text-file intake now stores raw source text separately under `Team Inbox/TutAIR/YYYY/MM/source-content/`; capture Markdown records source-content status/path/readiness; processing reads ready source content and blocks URL-only captures until transcript or lesson text exists.
+- TutAIR dashboard UI is visually approved and now has local interactive controls: flashcard practice, simple quiz reveal, notes return, browser read-aloud, focus mode, reviewed markers, favourites, and Coming Soon feedback for unfinished tools. State is stored in browser `localStorage`; Markdown remains unchanged.
 
 ## Active Build: F247 AsdAIr Microsite
 
@@ -91,6 +92,7 @@ The workspace is plain markdown. The folder itself is the source of truth.
 - For TutAIR V3, decide where durable processed GCSE resources should live after inbox processing: remain in `Team Inbox/TutAIR/.../processed/`, move to `PKM/Documents/`, or create a dedicated GCSE resource area.
 - For TutAIR V3, add batch processing for pending TutAIR captures once the single-file workflow feels right.
 - For TutAIR Milestone 2, keep URL-only captures blocked from processing unless source content is attached.
+- For TutAIR dashboard controls, future work should only promote local browser state into a durable data model after Milestone 3 decides the long-term TutAIR resource/progress model.
 - For TutAIR V4, decide whether the local viewer should become a fuller dashboard with search, filters, and launch scripts after real notes exist.
 - Add structured email submission to the Next.js AsdAIr app.
 - Decide which email provider to use for Vercel deployment, such as Resend, Postmark, SendGrid, or SMTP-compatible service.

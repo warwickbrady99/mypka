@@ -119,6 +119,21 @@ It shows the processed TutAIR sections in a revision-friendly page:
 
 The viewer is local and read-only. It does not edit notes, publish anything online, or change TubeAIR.
 
+The viewer UI follows the approved TutAIR revision dashboard mockup: dark subject navigation, topic cards, colourful revision sections, study controls, and responsive panels. The backend and Markdown reading path are unchanged.
+
+Interactive controls now work locally in the browser:
+
+- `Flashcards` opens a practice view using the current note's flashcards, with Previous, Next, and Flip Card controls.
+- `Quiz Me` turns the current note's exam-style questions into a simple answer-and-reveal quiz.
+- `Notes` returns to the full revision note.
+- `Read Aloud` uses the browser's built-in SpeechSynthesis API and includes Play, Pause, and Stop controls.
+- `Focus Mode` hides side panels and distractions until you switch back.
+- `Mark as Reviewed` stores reviewed status in browser `localStorage`.
+- `Save Topic` stores favourites in browser `localStorage` and shows a Favourites section in the sidebar.
+- Controls that are not ready yet show `Coming Soon`.
+
+All of this stays local to the browser. It does not publish anything online, call an AI service, or change the Markdown files.
+
 ## Checks
 
 Run the focused tests from this folder:

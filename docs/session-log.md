@@ -159,3 +159,11 @@ When the context changes significantly, start a new Codex chat and point it to t
 - Updated processing so URL-only captures are blocked until actual transcript, lesson text, or source content exists.
 - Documented the three layers: raw source, TutAIR capture metadata/extracted content, and processed learning resources.
 - TubeAIR remains the owner of YouTube transcript capture; TutAIR reuses that architecture by linking or importing transcript text rather than duplicating the listener.
+
+## 2026-07-09 - TutAIR dashboard buttons
+
+- Continued TutAIR Milestone 2 after the ADHD-friendly dashboard UI was visually approved.
+- Kept the existing Markdown reader, intake, source-content pipeline, processing logic, and course map unchanged.
+- Added local browser interactions to `tutair_viewer.py`: flashcard practice, simple quiz reveal, notes return, read-aloud controls, focus mode, reviewed status, favourites, and Coming Soon feedback.
+- Reviewed/favourite state is stored only in browser `localStorage`; it does not edit Markdown notes or create a user/account system.
+- Updated README and beginner instructions with the new local button behavior.

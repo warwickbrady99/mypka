@@ -134,6 +134,18 @@ The viewer is read-only. It shows processed notes from:
 Team Inbox/TutAIR/YYYY/MM/processed/
 ```
 
+The dashboard buttons are local browser tools:
+
+- `Flashcards` lets you practise the note's flashcards one card at a time.
+- `Quiz Me` lets you type an answer before revealing a simple answer prompt.
+- `Notes` brings you back to the full note.
+- `Read Aloud` uses your browser to read the note out loud.
+- `Focus Mode` hides extra panels so the note is easier to read.
+- `Mark as Reviewed` saves a reviewed marker in this browser.
+- `Save Topic` saves the topic as a favourite in this browser.
+
+These saved markers use browser storage on this computer. They do not edit the Markdown note.
+
 ## Current Limits
 
 - TutAIR is Markdown-first.
@@ -141,3 +153,4 @@ Team Inbox/TutAIR/YYYY/MM/processed/
 - TutAIR does not change TubeAIR.
 - TutAIR does not fetch YouTube transcripts itself yet. It can reuse TubeAIR transcript captures by linking or importing the transcript text as source content.
 - TutAIR does not confirm exam boards without evidence.
+- TutAIR button state is local browser state for now, not a shared account system.
