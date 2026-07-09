@@ -19,6 +19,8 @@ This MVP does not build the web dashboard yet. It gives TutAIR a safe local inta
 - `test_tutair_intake.py` - checks for the V1 intake command.
 - `tutair_process.py` - small V2 command that creates an ADHD-friendly processed learning note from one capture.
 - `test_tutair_process.py` - checks for the V2 processor.
+- `tutair_viewer.py` - small V3 local web viewer for processed TutAIR notes.
+- `test_tutair_viewer.py` - checks for the V3 viewer.
 
 ## V1 Intake Command
 
@@ -74,12 +76,44 @@ Exam-board mapping is unconfirmed by default. You can record a possible board, b
 python .\tutair_intake.py --url "https://www.youtube.com/watch?v=abcdefghijk" --subject "Science" --topic "Cell division" --possible-exam-board "AQA"
 ```
 
+## V3 Local Web Viewer
+
+Run the read-only revision viewer from this folder:
+
+```powershell
+python .\tutair_viewer.py
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8765
+```
+
+The viewer reads processed notes from:
+
+```text
+Team Inbox/TutAIR/YYYY/MM/processed/
+```
+
+It shows the processed TutAIR sections in a revision-friendly page:
+
+- Tiny Summary
+- Key Facts
+- What This Means
+- Exam-Style Questions
+- Flashcards
+- Next Revision Task
+- Exam Board Mapping
+
+The viewer is local and read-only. It does not edit notes, publish anything online, or change TubeAIR.
+
 ## Checks
 
 Run the focused tests from this folder:
 
 ```powershell
-python -m unittest test_tutair_intake.py test_tutair_process.py
+python -m unittest test_tutair_intake.py test_tutair_process.py test_tutair_viewer.py
 ```
 
 ## Important Rule

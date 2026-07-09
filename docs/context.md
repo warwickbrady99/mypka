@@ -66,6 +66,7 @@ The workspace is plain markdown. The folder itself is the source of truth.
 - TutAIR MVP now exists as a Markdown-first GCSE learning intake and processing lane in `Deliverables/2026-07-09-tutair-mvp/`, with captures landing under `Team Inbox/TutAIR/YYYY/MM/` and processed notes under `Team Inbox/TutAIR/YYYY/MM/processed/`.
 - TutAIR V1 captures either a YouTube URL or UTF-8 pasted text file. YouTube V1 records URL/video ID only; transcript fetching is intentionally not built yet.
 - TutAIR V2 processes one capture Markdown file into an ADHD-friendly learning note with tiny summary, key facts, what this means, exam-style questions, flashcards, next revision task, and exam-board mapping status.
+- TutAIR V3 adds a local read-only web viewer in `Deliverables/2026-07-09-tutair-mvp/tutair_viewer.py`. It reads processed notes from `Team Inbox/TutAIR/YYYY/MM/processed/`, groups them by subject, and displays the ADHD-friendly sections.
 
 ## Active Build: F247 AsdAIr Microsite
 
@@ -83,6 +84,7 @@ The workspace is plain markdown. The folder itself is the source of truth.
 - For TutAIR V3, decide where durable processed GCSE resources should live after inbox processing: remain in `Team Inbox/TutAIR/.../processed/`, move to `PKM/Documents/`, or create a dedicated GCSE resource area.
 - For TutAIR V3, add batch processing for pending TutAIR captures once the single-file workflow feels right.
 - For TutAIR V3, improve the deterministic processor so URL-only captures do not produce weak learning notes without actual transcript or pasted content.
+- For TutAIR V4, decide whether the local viewer should become a fuller dashboard with search, filters, and launch scripts after real notes exist.
 - Add structured email submission to the Next.js AsdAIr app.
 - Decide which email provider to use for Vercel deployment, such as Resend, Postmark, SendGrid, or SMTP-compatible service.
 - Replace the Next.js local confirmation preview with a real submit/sent/error flow after email is wired.

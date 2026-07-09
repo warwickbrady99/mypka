@@ -104,10 +104,30 @@ End every learning note with one small task, such as:
 
 The goal is to make revision easier to start.
 
+## Step 6 - Open The Local Viewer
+
+Run this from the TutAIR MVP folder:
+
+```powershell
+python .\tutair_viewer.py
+```
+
+Then open this address in your browser:
+
+```text
+http://127.0.0.1:8765
+```
+
+The viewer is read-only. It shows processed notes from:
+
+```text
+Team Inbox/TutAIR/YYYY/MM/processed/
+```
+
 ## Current Limits
 
 - TutAIR is Markdown-first.
-- TutAIR does not build the web dashboard yet.
+- TutAIR V3 has a local read-only viewer, not a public web dashboard.
 - TutAIR does not change TubeAIR.
 - TutAIR does not fetch YouTube transcripts yet.
 - TutAIR does not confirm exam boards without evidence.

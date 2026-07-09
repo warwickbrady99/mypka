@@ -115,3 +115,12 @@ When the context changes significantly, start a new Codex chat and point it to t
 - Cleanup removed generated Python cache, temporary test inbox files, and placeholder TutAIR test captures from the real inbox.
 - Out of scope: web dashboard, TubeAIR behavior changes, automatic YouTube transcript fetching, AI enrichment, batch processing, and confirmed exam-board/spec mapping.
 - Next best step: TutAIR V3 should add a safe source-content path for YouTube transcripts, then batch-process pending captures once the single-file workflow is trusted.
+
+## 2026-07-09 - TutAIR V3 local viewer
+
+- Added `tutair_viewer.py` as a local read-only web viewer inside `Deliverables/2026-07-09-tutair-mvp/`.
+- The viewer reads processed Markdown notes from `Team Inbox/TutAIR/YYYY/MM/processed/`.
+- It groups the note list by subject and displays topic, exam-board status, tiny summary, key facts, what this means, exam-style questions, flashcards, next revision task, and exam-board mapping.
+- Added `test_tutair_viewer.py` and updated the TutAIR README and beginner instructions with local run steps.
+- V3 intentionally does not publish online, edit Markdown, change TubeAIR, fetch YouTube transcripts, add a database, or rebuild TutAIR from scratch.
+- Check run: `python -m unittest test_tutair_intake.py test_tutair_process.py test_tutair_viewer.py` passed with 16 tests.
